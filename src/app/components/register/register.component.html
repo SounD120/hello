@@ -1,0 +1,202 @@
+<div class="alert alert-danger" role="alert" *ngIf="_userService.danger">
+  {{_userService.danger}}
+</div>
+
+<div class="alert alert-warning" role="alert" *ngIf="_userService.warning">
+  {{_userService.warning}}
+</div>
+
+<div class="alert alert-success" role="alert" *ngIf="_userService.success">
+  {{_userService.success}}
+</div>
+
+<h4>{{ 'REGISTER' | translate}}</h4>
+<hr>
+<form [formGroup]="forma" (ngSubmit)="registerUser()">
+
+  <div class="row">
+
+    <div class="col">
+      <div class="form-group row">
+        <label class="col-3 col-form-label">
+          {{ 'NAME ' | translate}}
+        </label>
+        <div class="col-9">
+          <input class="form-control" 
+                  [ngClass]="{ 'is-invalid': !forma.controls['name'].valid }"
+                  [ngModel]="user.name"
+                  name="name" 
+                  type="text" 
+                  placeholder="{{ 'NAME ' | translate}}" 
+                  formControlName="name">
+          <div *ngIf="forma.get('name').errors?.required" class="form-control-feedback invalid-feedback">
+            {{ 'THE_NAME_IS_REQUIRED ' | translate}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="form-group row">
+        <label class="col-3 col-form-label">
+          {{ 'LASTNAME ' | translate}}
+        </label>
+        <div class="col-9">
+          <input class="form-control" 
+                  [ngClass]="{ 'is-invalid': !forma.controls['lastname'].valid }" 
+                  [ngModel]="user.lastname" 
+                  name="lastname"
+                  type="text" 
+                  placeholder="{{ 'LASTNAME ' | translate}}"
+                  formControlName="lastname">
+          <div *ngIf="forma.get('lastname').errors?.required" class="form-control-feedback invalid-feedback">
+            {{ 'THE_LASTNAME_IS_REQUIRED ' | translate}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+
+    <div class="col">
+      <div class="form-group row">
+        <label class="col-3 col-form-label">
+          {{ 'EMAIL ' | translate}}
+        </label>
+        <div class="col-9">
+          <input class="form-control" [ngClass]="{ 'is-invalid': !forma.controls['email'].valid }" 
+                [ngModel]="user.email" name="email"
+                type="text" placeholder="{{ 'EMAIL ' | translate}}"
+            formControlName="email">
+          <div *ngIf="forma.get('email').errors?.required" class="form-control-feedback invalid-feedback">
+            {{ 'THE_EMAIL_MANDATORY ' | translate}}
+          </div>
+          <div *ngIf="forma.get('email').errors?.pattern && !forma.get('email').errors?.required" class="form-control-feedback invalid-feedback">
+            {{ 'THE_EMAIL_IS_NOT_VALID. ' | translate}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="form-group row">
+        <label class="col-3 col-form-label">
+          {{ 'PHONE_NUMBER ' | translate}}
+        </label>
+        <div class="col-9">
+          <input class="form-control" [ngClass]="{ 'is-invalid': !forma.controls['phoneNumber'].valid }" 
+                [ngModel]="user.phoneNumber" name="phoneNumber"
+                type="number" placeholder="{{ 'PHONE_NUMBER ' | translate}}"
+                formControlName="phoneNumber">
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+    <div class="row">
+    
+      <div class="col">
+        <div class="form-group row">
+          <label class="col-3 col-form-label">
+            {{ 'LANGUAGE ' | translate}}
+          </label>
+          <div class="col-9">
+            <select class="form-control" [ngClass]="{ 'is-invalid': !forma.controls['language'].valid }"
+                    [ngModel]="user.language" name="language"
+                    placeholder="Select language"
+                    formControlName="language">
+              <option value="">
+                {{ 'SELECT_YOUR_LANGUAGE ' | translate}}
+              </option>
+              <option *ngFor="let language of _resourceService.languages" [value]="language.id">{{ language.name }}</option>
+            </select>
+            <div *ngIf="forma.get('language').errors?.required" class="form-control-feedback invalid-feedback">
+              {{ 'THE_LANGUAGE_IS_MANDATORY' | translate}}
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <div class="col">
+        <div class="form-group row">
+          <label class="col-3 col-form-label">
+            {{ 'ROLE ' | translate}}
+          </label>
+          <div class="col-9">
+            <select class="form-control" [ngClass]="{ 'is-invalid': !forma.controls['role'].valid }"
+                    [ngModel]="user.role" name="role"
+                    placeholder="Select role" formControlName="role">
+              <option value="">
+                {{ 'SELECT_THE_ROLE_FOR_THE_USER ' | translate}}
+              </option>
+              <option *ngFor="let role of _resourceService.roles" [value]="role.id">{{ role.name }}</option>
+            </select>
+            <div *ngIf="forma.get('role').errors?.required" class="form-control-feedback invalid-feedback">
+              {{ 'THE ROLE IS MANDATORY' | translate}}
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    </div>
+
+
+  <div class="row">
+
+    <div class="col">
+      <div class="form-group row">
+        <label class="col-3 col-form-label">
+          {{ 'PASSWORD' | translate}}
+        </label>
+        <div class="col-9">
+          <input class="form-control" [ngClass]="{ 'is-invalid': !forma.controls['password'].valid }" 
+                type="password" placeholder="Password"
+                formControlName="password" >
+          <div class="form-control-feedback invalid-feedback">
+            {{ 'USER_PASSWORD_IN_DEMO_SITE_IS ' | translate}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="form-group row">
+        <label class="col-3 col-form-label">
+          {{ 'RETYPE_PASSWORD ' | translate}}
+        </label>
+        <div class="col-9">
+          <input class="form-control" [ngClass]="{ 'is-invalid': !forma.controls['confirmpassword'].valid }" type="password" placeholder="Confirm password"
+            formControlName="confirmpassword">
+          <div class="form-control-feedback invalid-feedback">
+            {{ 'USER_PASSWORD_IN_DEMO_SITE_IS ' | translate}}
+          </div>
+          <div *ngIf="forma.get('confirmpassword').errors?.notEqualsPass && !forma.get('confirmpassword').errors?.required" class="form-control-feedback invalid-feedback">
+            {{ 'THE_PASSWORDS_ARE_NOT_EQUAL ' | translate}}
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  
+
+
+
+  <div class="form-group row">
+    <div class="form-group col-md-6">
+      <button type="submit" class="btn btn-primary btn-block" [disabled]="!forma.valid">
+        Register
+      </button>
+    </div>
+    <div class="col-md-6">
+      <button type="reset" class="btn btn-secondary btn-block">
+        Reset
+      </button>
+    </div>
+  </div>
+
+</form>

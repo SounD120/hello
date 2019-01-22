@@ -1,0 +1,53 @@
+@import './variables';
+@import './mixins';
+
+.main-container{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+// Color to navbar
+.navbar-main-color {
+  background-color: $main-color;
+}
+
+.navbar-secondary-color {
+  background-color: $secondary-color !important;
+}
+
+// Color to buttons
+.main-color{
+    color: $main-color;
+}
+
+a:hover
+{
+    color: $main-color;
+}
+
+.secondary-color{
+    color: $secondary-color;
+}
+
+.background-main-color{
+    color: #fff;
+    background-color: $main-color;
+}
+
+.background-secondary-color{
+    color: #fff;
+    background-color: $secondary-color;
+}
+
+.btn-main-color{
+    color: #fff;
+    background-color: $main-color;
+    border-color: $main-color;
+}
+
+.btn-secondary-color{
+    color: #fff;
+    background-color: $secondary-color;
+    border-color: $secondary-color;
+}
+
